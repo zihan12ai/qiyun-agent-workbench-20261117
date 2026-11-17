@@ -1,0 +1,24 @@
+name: qiyun-workbench
+services:
+  workbench:
+    build: .
+    init: true
+    ports:
+      - "127.0.0.1:${WORKBENCH_PORT:-3100}:3100"
+    environment:
+      HOST: 0.0.0.0
+      AGENT_MODE: ${AGENT_MODE:-demo}
+      CODEX_API_KEY: ${CODEX_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      CODEX_MODEL: ${CODEX_MODEL:-}
+      RUN_TIMEOUT_MS: ${RUN_TIMEOUT_MS:-600000}
+      MAX_CONCURRENT_RUNS: ${MAX_CONCURRENT_RUNS:-2}
+    volumes:
+      - workbench-data:/app/data
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+volumes:
+  workbench-data:

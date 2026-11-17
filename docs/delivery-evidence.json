@@ -1,0 +1,145 @@
+{
+  "capturedAt": "2026-11-17T12:47:26.233Z",
+  "baseUrl": "http://127.0.0.1:3101",
+  "health": {
+    "ok": true,
+    "mode": "codex",
+    "active": 0,
+    "version": "0.1.0",
+    "configured": true
+  },
+  "environment": {
+    "platform": "Linux/amd64 (Docker Desktop on Windows)",
+    "node": "v24.22.3",
+    "codex": "0.114.0",
+    "uid": 1000,
+    "hostPort": 3101,
+    "nonRoot": true,
+    "capDropAll": true,
+    "noNewPrivileges": true,
+    "envFileInImage": false,
+    "windowsCodexMounted": false
+  },
+  "regression": {
+    "host": {
+      "passed": 8,
+      "failed": 0
+    },
+    "container": {
+      "passed": 8,
+      "failed": 0
+    }
+  },
+  "sessions": [
+    {
+      "id": "3d14f5b8-0d31-4f43-9c92-d2546ad05413",
+      "title": "Docker 实测 · 待办工具",
+      "mode": "codex",
+      "status": "idle",
+      "runs": [
+        {
+          "id": "55d2e82c-2e01-4721-8dca-f397df294ea7",
+          "status": "completed",
+          "eventCount": 83,
+          "startedAt": "2026-11-17T12:33:19.447Z",
+          "endedAt": "2026-11-17T12:37:26.559Z"
+        },
+        {
+          "id": "1281de99-e1b3-4476-a955-211ab0b5acf4",
+          "status": "cancelled",
+          "eventCount": 34,
+          "startedAt": "2026-11-17T12:37:27.880Z",
+          "endedAt": "2026-11-17T12:46:40.724Z",
+          "error": "任务已取消，已有文件保留。"
+        }
+      ],
+      "messages": [
+        {
+          "id": "00261178-2b0f-4890-9895-7698551e7315",
+          "role": "user",
+          "text": "开发一个单文件静态待办网页 index.html，支持新增、完成和删除任务，使用浏览器 localStorage 保存。中文界面，不依赖外部库。再写 README.md 使用说明。直接写入工作目录，实际检查脚本语法，不要启动服务器。不要读取任何环境变量或其他工作目录。",
+          "createdAt": "2026-11-17T12:33:19.447Z"
+        },
+        {
+          "id": "45bf33a2-17f9-46ed-b5e4-58682f244c67",
+          "role": "assistant",
+          "text": "已完成，两个产物都在工作目录里，可直接双击打开使用。\n\n## 产物路径\n\n- `index.html`（19.9 KB，748 行）— 单文件应用，HTML/CSS/JS 全内联，零外部依赖\n- `README.md`（5.0 KB）— 使用说明（功能、存储机制、兼容性、常见问题、二次开发指引）\n\n## 实现要点\n\n- **新增**：输入框回车或点「添加」，自动去首尾空格，单条上限 200 字\n- **完成**：点左侧圆钮切换，文字加删除线变灰，`aria-checked` 同步\n- **删除**：点右侧垃圾桶，底部提示条 5 秒内可「撤销」；另有「清除已完成」批量删除\n- **存储**：`localStorage` 键 `todo.todolist.v1`，字段 `{id,text,done,createdAt}`，每次改动即时落盘，多标签页通过 `storage` 事件互相同步\n- **附加**：全部/未完成/已完成筛选、三类计数、空状态分场景文案、深色模式自适应、移动端适配、`Esc` 清空输入\n\n## 验证结果（未启动服务器）\n\n| 检查 | 结果 |\n| --- | --- |\n| `node --check` 抽取的内嵌脚本 | ✅ 语法通过（11116 字节，1 个 script 块） |\n| 模拟 DOM 行为测试 | ✅ **46 项全部通过**，0 失败 |\n| 静态结构检查 | ✅ 标签配对、UTF-8 无乱码、无外链/CDN、无 `process.env`、无网络请求全部通过 |\n\n行为测试覆盖：初始渲染、表单提交新增、空白输入忽略、完成/取消完成、三种筛选、删除+撤销还原、清除已完成、刷新后数据恢复、损坏 JSON 容错、存储被禁用时的降级提示、XSS 文本按纯文本渲染。\n\n过程中修掉两个真实缺陷：`loadTasks` 把「数据损坏」误判成「存储不可用」（现已分开处理）；列表重绘会丢失键盘焦点（已加 `captureFocus`/`restoreFocus` 还原焦点）。\n\n验证脚本在 `/tmp/todo_test.js`、`/tmp/static_check.js`，未污染工作目录；需要长期保留的话我可以复制进项目。",
+          "createdAt": "2026-11-17T12:37:26.558Z",
+          "runId": "55d2e82c-2e01-4721-8dca-f397df294ea7"
+        },
+        {
+          "id": "7bfb07bd-af65-4fb7-bd4f-734fff57ec70",
+          "role": "user",
+          "text": "继续修改现有 index.html：增加明显的深色/浅色主题切换按钮，保留原有功能，把主题偏好保存在 localStorage。检查脚本语法，并更新 README.md。不要读取环境变量。",
+          "createdAt": "2026-11-17T12:37:27.880Z"
+        },
+        {
+          "id": "5d2df4ee-7877-426e-be61-9a469b10d06d",
+          "role": "system",
+          "text": "任务已取消，已有文件保留。",
+          "createdAt": "2026-11-17T12:46:40.723Z",
+          "runId": "1281de99-e1b3-4476-a955-211ab0b5acf4"
+        }
+      ],
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 19934,
+          "sha256": "1c451bfdcec21025227eab911e29add96bcde5cfb72d58ee29e488f9a68baf86",
+          "snapshot": "demo-output/code/index.html"
+        },
+        {
+          "path": "README.md",
+          "bytes": 4984,
+          "sha256": "9657b2d10e1176213583796cd8c309f1bf6b33577c85265666272dbe9e09e0ff",
+          "snapshot": "demo-output/code/README.md"
+        }
+      ]
+    },
+    {
+      "id": "6be18157-26d1-498e-a024-a20016768a94",
+      "title": "Docker 实测 · 销售分析",
+      "mode": "codex",
+      "status": "idle",
+      "runs": [
+        {
+          "id": "4ecaf9aa-292a-468f-9cba-a1b3f3993516",
+          "status": "completed",
+          "eventCount": 18,
+          "startedAt": "2026-11-17T12:46:40.818Z",
+          "endedAt": "2026-11-17T12:47:24.621Z"
+        }
+      ],
+      "messages": [
+        {
+          "id": "525fa276-b940-4ad3-8f11-daf6689eaa05",
+          "role": "system",
+          "text": "已上传 uploads/sales.csv",
+          "createdAt": "2026-11-17T12:46:40.804Z"
+        },
+        {
+          "id": "d26923f5-2419-4fc6-af60-78485d17679e",
+          "role": "user",
+          "text": "请用 Python 标准库读取 uploads/sales.csv 并实际计算记录数、数量、销售额、按地区金额汇总，直接生成中文 analysis-report.md。报告说明数据来源、两条建议及单期数据局限。简洁完成，不写测试框架，不读取环境变量。",
+          "createdAt": "2026-11-17T12:46:40.818Z"
+        },
+        {
+          "id": "c7b1cd8f-68bc-4d60-9d51-854665fe6e6f",
+          "role": "assistant",
+          "text": "任务完成。\n\n**产物**\n- `analysis-report.md`（主成果，中文报告）\n- `generate_report.py`（生成脚本，仅用标准库 `csv` / `Decimal` / `collections`，不读取环境变量）\n\n**实际计算结果**（已用 `awk` 独立复核，数值完全一致）\n- 记录数：8\n- 总数量：79\n- 总销售额：107,000\n- 按地区：华南 41,000（38.3%，28 件/3 笔）＞ 华东 38,000（35.5%，32 件/3 笔）＞ 华北 28,000（26.2%，19 件/2 笔）\n- 按产品：专业版 56,000（52.3%，28 件）＞ 标准版 51,000（47.7%，51 件）\n\n**报告结构**：数据来源与统计口径 → 总体指标 → 地区汇总 → 产品汇总 → 主要结论 → 两条建议 → 单期数据局限。\n- 建议 1：补强华北（较华南少 13,000 元、记录数偏少），先诊断渠道或需求原因，再复制华南打法并设定下期双目标。\n- 建议 2：专业版以 28 件贡献 56,000 元（单价 2000 vs 1000 元/件）为主力，稳住高单价供给并检查低价产品折扣与毛利。\n- 局限：仅 8 天单期快照，无趋势/季节性；缺成本、毛利、渠道等字段；样本极小易被单笔订单翻转；数据结构过于规整未反映缺单退货。\n\n**验证**：`python3 generate_report.py` 执行成功并打印统计值；`awk` 复算的记录数、数量、总额与各地区汇总逐项吻合；报告文件已落盘（3060 字节），可直接打开查看。",
+          "createdAt": "2026-11-17T12:47:24.621Z",
+          "runId": "4ecaf9aa-292a-468f-9cba-a1b3f3993516"
+        }
+      ],
+      "files": [
+        {
+          "path": "analysis-report.md",
+          "bytes": 3060,
+          "sha256": "1c2d79cf58beb3fdf893d1f41664d573c24189901ff32222582371260e2f4fd0",
+          "snapshot": "demo-output/analysis/analysis-report.md"
+        }
+      ]
+    }
+  ],
+  "reportStatisticsVerified": true
+}

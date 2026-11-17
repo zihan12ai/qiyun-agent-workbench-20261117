@@ -1,0 +1,10 @@
+{
+  "name": "qiyun-agent-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local-first browser workbench for real Codex CLI tasks, with an explicit offline demo mode.",
+  "engines": { "node": ">=24" },
+  "scripts": { "start": "node server.mjs", "test": "node --test tests/*.test.mjs" },
+  "license": "MIT"
+}
