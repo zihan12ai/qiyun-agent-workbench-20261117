@@ -171,3 +171,9 @@ CLI 参考：[官方非交互模式文档](https://developers.openai.com/codex/n
 - [四轮真实任务索引及重启校验](docs/runtime-evidence.json)
 - [完整脱敏消息、执行日志和文件 SHA-256](docs/delivery-evidence.json)
 - [真实生成的网页](docs/demo-output/code/index.html) 与 [管理摘要](docs/demo-output/analysis/analysis-report.md)
+
+## 桌面截图
+
+![桌面工作台](docs/screenshots/workbench-desktop.jpg)
+
+此宽屏截图于考试结束后补拍，未修改应用功能。考试截止前最后提交：`608e5c7`（2026-11-17 20:56:04 +08:00）。

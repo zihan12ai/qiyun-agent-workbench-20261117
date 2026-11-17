@@ -32,6 +32,10 @@ node scripts/verify-runtime.mjs
 
 ## 本次浏览器实测截图
 
+桌面工作台全貌：
+
+![桌面工作台](screenshots/workbench-desktop.jpg)
+
 真实 Codex 生成的待办网页，后续修改后仍可新增任务：
 
 ![真实待办预览](screenshots/real-code.jpg)
@@ -40,4 +44,4 @@ node scripts/verify-runtime.mjs
 
 ![真实报告预览](screenshots/real-report.jpg)
 
-截图取自本次实际运行的窄屏工作台；完整源码、报告和统计数据见 demo-output/ 与 delivery-evidence.json。
+截图在考试结束后重新拍摄为 1440 × 900 桌面宽屏，展示同一服务和已有产物；完整源码、报告和统计数据见 demo-output/ 与 delivery-evidence.json。考试截止前的最后提交为 608e5c7（2026-11-17 20:56:04 +08:00）。
