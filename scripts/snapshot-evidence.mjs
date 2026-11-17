@@ -11,11 +11,11 @@ for(const kind of ['code','analysis']){
  const d=snapshots.find(d=>d.session.runs.some(r=>r.status==='completed'))||snapshots[0];
  if(!d)continue;
  const dest=`docs/demo-output/${kind}`;await mkdir(dest,{recursive:true});
- const entry={id:d.session.id,title:d.session.title,mode:d.session.mode,status:d.session.status,runs:d.session.runs.map(r=>({id:r.id,status:r.status,eventCount:r.eventCount,startedAt:r.startedAt,endedAt:r.endedAt,error:r.error})),messages:d.session.messages,files:[]};
+ const entry={id:d.session.id,title:d.session.title,mode:d.session.mode,status:d.session.status,runs:d.session.runs.map(r=>({id:r.id,status:r.status,eventCount:r.eventCount,startedAt:r.startedAt,endedAt:r.endedAt,error:r.error,logs:r.logs})),messages:d.session.messages,files:[]};
  for(const f of d.files){
   if(f.path.startsWith('uploads/'))continue;
   const content=(await get(`/api/sessions/${d.session.id}/file?path=${encodeURIComponent(f.path)}`)).content;
-  if(!['index.html','README.md','analysis-report.md'].includes(f.path))continue;
+  if(!['index.html','README.md','analysis-report.md','generate_report.py'].includes(f.path))continue;
   await writeFile(`${dest}/${f.path}`,content);
   entry.files.push({path:f.path,bytes:Buffer.byteLength(content),sha256:createHash('sha256').update(content).digest('hex'),snapshot:`demo-output/${kind}/${f.path}`});
  }
@@ -23,5 +23,8 @@ for(const kind of ['code','analysis']){
 }
 const report=result.sessions.find(s=>s.mode==='codex'&&s.title.includes('销售分析'));
 if(report?.files.some(f=>f.path==='analysis-report.md')){const text=await readFile('docs/demo-output/analysis/analysis-report.md','utf8');const numbers=text.replace(/[,，\s]/g,'');result.reportStatisticsVerified=['107000','41000','38000','28000'].every(n=>numbers.includes(n));}
+const code=result.sessions.find(s=>s.title.includes('待办工具'));if(code?.files.some(f=>f.path==='index.html')){const html=await readFile('docs/demo-output/code/index.html','utf8');const readme=await readFile('docs/demo-output/code/README.md','utf8');result.codeFollowupVerified=html.includes('<title>我的行动清单</title>')&&html.includes('<h1>我的行动清单</h1>')&&readme.includes('支持 Enter 快速新增，Esc 清空输入');}
+if(report?.files.some(f=>f.path==='analysis-report.md'))result.reportFollowupVerified=/管理.*摘要/.test((await readFile('docs/demo-output/analysis/analysis-report.md','utf8')).split('\n')[0]);
+result.status=result.codeFollowupVerified&&result.reportFollowupVerified&&result.reportStatisticsVerified?'passed':'partial';
 await writeFile('docs/delivery-evidence.json',JSON.stringify(result,null,2));
 console.log(JSON.stringify({sessions:result.sessions.map(s=>({id:s.id,runs:s.runs.map(r=>r.status),files:s.files.map(f=>f.path)})),reportStatisticsVerified:result.reportStatisticsVerified}));

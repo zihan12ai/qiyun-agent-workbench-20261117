@@ -1,0 +1,29 @@
+{
+  "capturedAt": "2026-11-17T12:50:41.029928009Z",
+  "container": "qiyun-workbench-workbench-1",
+  "imageId": "sha256:8e220272239c9b18c8f467c21f5ea7a36814a84299239aa093c4ff79ec4ba60c",
+  "status": "running",
+  "health": "healthy",
+  "user": "node",
+  "capDrop": [
+    "ALL"
+  ],
+  "securityOpt": [
+    "no-new-privileges:true"
+  ],
+  "portBindings": {
+    "3100/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "3101"
+      }
+    ]
+  },
+  "mounts": [
+    {
+      "type": "volume",
+      "destination": "/app/data",
+      "name": "qiyun-workbench_workbench-data"
+    }
+  ]
+}

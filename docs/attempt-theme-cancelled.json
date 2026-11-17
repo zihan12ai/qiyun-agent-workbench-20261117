@@ -1,0 +1,24 @@
+{
+  "verifiedAt": "2026-11-17T12:33:19.358Z",
+  "baseUrl": "http://127.0.0.1:3101",
+  "checks": [
+    {
+      "sessionId": "3d14f5b8-0d31-4f43-9c92-d2546ad05413",
+      "runId": "55d2e82c-2e01-4721-8dca-f397df294ea7",
+      "status": "completed",
+      "cliEvents": 83,
+      "startedAt": "2026-11-17T12:33:19.447Z",
+      "endedAt": "2026-11-17T12:37:26.559Z",
+      "assistant": "已完成，两个产物都在工作目录里，可直接双击打开使用。\n\n## 产物路径\n\n- `index.html`（19.9 KB，748 行）— 单文件应用，HTML/CSS/JS 全内联，零外部依赖\n- `README.md`（5.0 KB）— 使用说明（功能、存储机制、兼容性、常见问题、二次开发指引）\n\n## 实现要点\n\n- **新增**：输入框回车或点「添加」，自动去首尾空格，单条上限 200 字\n- **完成**：点左侧圆钮切换，文字加删除线变灰，`aria-checked` 同步\n- **删除**：点右侧垃圾桶，底部提示条 5 秒内可「撤销」；另有「清除已完成」批量删除\n- **存储**：`localStorage` 键 `todo.todolist.v1`，字段 `{id,text,done,createdAt}`，每次改动即时落盘，多标签页通过 `storage` 事件互相同步\n- **附加**：全部/未完成/已完成筛选、三类计数、空状态分场景文案、深色模式自适应、移动端适配、`Esc` 清空输入\n\n## 验证结果（未启动服务器）\n\n| 检查 | 结果 |\n| --- | --- |\n| `node --check` 抽取的内嵌脚本 | ✅ 语法通过（11116 字节，1 个 script 块） |\n| 模拟 DOM 行为测试 | ✅ **46 项全部通过**，0 失败 |\n| 静态结构检查 | ✅ 标签配对、UTF-8 无乱码、无外链/CDN、无 `process.env`、无网络请求全部通过 |\n\n行为测试覆盖：初始渲染、表单提交新增、空白输入忽略、完成/取消完成、三种筛选、删除+撤销还原、清除已完成、刷新后数据恢复、损坏 JSON 容错、存储被禁用时的降级提示、XSS 文本按纯文本渲染。\n\n过程中修掉两个真实缺陷：`loadTasks` 把「数据损坏」误判成「存储不可用」（现已分开处理）；列表重绘会丢失键盘焦点（已加 `captureFocus`/`restoreFocus` 还原焦点）。\n\n验证脚本在 `/tmp/todo_test.js`、`/tmp/static_check.js`，未污染工作目录；需要长期保留的话我可以复制进项目。"
+    }
+  ],
+  "health": {
+    "ok": true,
+    "mode": "codex",
+    "active": 0,
+    "version": "0.1.0",
+    "configured": true
+  },
+  "status": "failed",
+  "error": "任务已取消，已有文件保留。\n+ actual - expected\n\n+ 'cancelled'\n- 'completed'\n"
+}

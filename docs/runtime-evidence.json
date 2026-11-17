@@ -1,6 +1,14 @@
 {
-  "verifiedAt": "2026-11-17T12:33:19.358Z",
+  "verifiedAt": "2026-11-17T12:50:39.995Z",
   "baseUrl": "http://127.0.0.1:3101",
+  "status": "passed",
+  "health": {
+    "ok": true,
+    "mode": "codex",
+    "active": 0,
+    "version": "0.1.0",
+    "configured": true
+  },
   "checks": [
     {
       "sessionId": "3d14f5b8-0d31-4f43-9c92-d2546ad05413",
@@ -10,15 +18,74 @@
       "startedAt": "2026-11-17T12:33:19.447Z",
       "endedAt": "2026-11-17T12:37:26.559Z",
       "assistant": "已完成，两个产物都在工作目录里，可直接双击打开使用。\n\n## 产物路径\n\n- `index.html`（19.9 KB，748 行）— 单文件应用，HTML/CSS/JS 全内联，零外部依赖\n- `README.md`（5.0 KB）— 使用说明（功能、存储机制、兼容性、常见问题、二次开发指引）\n\n## 实现要点\n\n- **新增**：输入框回车或点「添加」，自动去首尾空格，单条上限 200 字\n- **完成**：点左侧圆钮切换，文字加删除线变灰，`aria-checked` 同步\n- **删除**：点右侧垃圾桶，底部提示条 5 秒内可「撤销」；另有「清除已完成」批量删除\n- **存储**：`localStorage` 键 `todo.todolist.v1`，字段 `{id,text,done,createdAt}`，每次改动即时落盘，多标签页通过 `storage` 事件互相同步\n- **附加**：全部/未完成/已完成筛选、三类计数、空状态分场景文案、深色模式自适应、移动端适配、`Esc` 清空输入\n\n## 验证结果（未启动服务器）\n\n| 检查 | 结果 |\n| --- | --- |\n| `node --check` 抽取的内嵌脚本 | ✅ 语法通过（11116 字节，1 个 script 块） |\n| 模拟 DOM 行为测试 | ✅ **46 项全部通过**，0 失败 |\n| 静态结构检查 | ✅ 标签配对、UTF-8 无乱码、无外链/CDN、无 `process.env`、无网络请求全部通过 |\n\n行为测试覆盖：初始渲染、表单提交新增、空白输入忽略、完成/取消完成、三种筛选、删除+撤销还原、清除已完成、刷新后数据恢复、损坏 JSON 容错、存储被禁用时的降级提示、XSS 文本按纯文本渲染。\n\n过程中修掉两个真实缺陷：`loadTasks` 把「数据损坏」误判成「存储不可用」（现已分开处理）；列表重绘会丢失键盘焦点（已加 `captureFocus`/`restoreFocus` 还原焦点）。\n\n验证脚本在 `/tmp/todo_test.js`、`/tmp/static_check.js`，未污染工作目录；需要长期保留的话我可以复制进项目。"
+    },
+    {
+      "sessionId": "3d14f5b8-0d31-4f43-9c92-d2546ad05413",
+      "runId": "7363b967-1993-4c91-8030-c2d8d3338d96",
+      "status": "completed",
+      "cliEvents": 16,
+      "startedAt": "2026-11-17T12:48:45.472Z",
+      "endedAt": "2026-11-17T12:49:19.288Z",
+      "assistant": "三处文案变更已完成，未触碰其它功能或文件。\n\n## 变更结果\n\n| 位置 | 变更前 | 变更后 |\n| --- | --- | --- |\n| `index.html:7` | `<title>待办清单</title>` | `<title>我的行动清单</title>` |\n| `index.html:319` | `<h1>待办清单</h1>` | `<h1>我的行动清单</h1>` |\n| `README.md:5` | — | 新增一行 `支持 Enter 快速新增，Esc 清空输入` |\n\n## 核对命令与结果\n\n```\ngrep -n \"<title>\\|<h1>\" index.html\n```\n- `7:<title>我的行动清单</title>`\n- `319:        <h1>我的行动清单</h1>`\n\n```\nsed -n '1,6p' README.md\n```\n- 首行标题下方为新增句 `支持 Enter 快速新增，Esc 清空输入`，位置在顶部导语之后、文件清单之前。\n\n## 说明\n\n- 替换由一次 Python 脚本完成，脚本写在 `/tmp/patch_text.py`，每处替换前都做了出现次数断言（必须恰好为 1），避免误改。\n- `index.html` 中仍保留 1 处「待办清单」——位于 `<meta name=\"description\">` 描述文案，按你「只做这三处」的要求未作改动。\n- README 顶部一级标题 `# 待办清单（单文件静态网页）` 与正文导语同样保持原样，未纳入本次范围。\n- 未读取环境变量，未编写或运行测试框架，未扩展主题功能，原有功能与存储键 `todo.todolist.v1` 均未变化。\n\n文件路径：`/app/data/workspaces/3d14f5b8-0d31-4f43-9c92-d2546ad05413/index.html`、`/app/data/workspaces/3d14f5b8-0d31-4f43-9c92-d2546ad05413/README.md`"
+    },
+    {
+      "sessionId": "6be18157-26d1-498e-a024-a20016768a94",
+      "runId": "4ecaf9aa-292a-468f-9cba-a1b3f3993516",
+      "status": "completed",
+      "cliEvents": 18,
+      "startedAt": "2026-11-17T12:46:40.818Z",
+      "endedAt": "2026-11-17T12:47:24.621Z",
+      "assistant": "任务完成。\n\n**产物**\n- `analysis-report.md`（主成果，中文报告）\n- `generate_report.py`（生成脚本，仅用标准库 `csv` / `Decimal` / `collections`，不读取环境变量）\n\n**实际计算结果**（已用 `awk` 独立复核，数值完全一致）\n- 记录数：8\n- 总数量：79\n- 总销售额：107,000\n- 按地区：华南 41,000（38.3%，28 件/3 笔）＞ 华东 38,000（35.5%，32 件/3 笔）＞ 华北 28,000（26.2%，19 件/2 笔）\n- 按产品：专业版 56,000（52.3%，28 件）＞ 标准版 51,000（47.7%，51 件）\n\n**报告结构**：数据来源与统计口径 → 总体指标 → 地区汇总 → 产品汇总 → 主要结论 → 两条建议 → 单期数据局限。\n- 建议 1：补强华北（较华南少 13,000 元、记录数偏少），先诊断渠道或需求原因，再复制华南打法并设定下期双目标。\n- 建议 2：专业版以 28 件贡献 56,000 元（单价 2000 vs 1000 元/件）为主力，稳住高单价供给并检查低价产品折扣与毛利。\n- 局限：仅 8 天单期快照，无趋势/季节性；缺成本、毛利、渠道等字段；样本极小易被单笔订单翻转；数据结构过于规整未反映缺单退货。\n\n**验证**：`python3 generate_report.py` 执行成功并打印统计值；`awk` 复算的记录数、数量、总额与各地区汇总逐项吻合；报告文件已落盘（3060 字节），可直接打开查看。"
+    },
+    {
+      "sessionId": "6be18157-26d1-498e-a024-a20016768a94",
+      "runId": "7935fec9-7c27-4410-abad-6666bfb334ec",
+      "status": "completed",
+      "cliEvents": 28,
+      "startedAt": "2026-11-17T12:48:45.529Z",
+      "endedAt": "2026-11-17T12:49:43.486Z",
+      "assistant": "已完成，`analysis-report.md` 现在是一页式管理层摘要。\n\n**产物**\n- `analysis-report.md`（主成果，32 行 / 1973 字节，单页可直接打开）\n- `generate_report.py`（同步更新为生成新摘要格式，重跑不会覆盖成旧版长报告）\n\n**摘要结构**：抬头（周期 + 数据来源）→ 核心指标一行表 → 地区与产品结构 → 两条建议 → 结论使用限制。\n\n**保留的关键数值**（脚本实算，并用 `awk` 独立复算逐项吻合）\n- 记录数 8、总数量 79、总销售额 107,000 元\n- 华南 41,000（38.3%）＞ 华东 38,000（35.5%）＞ 华北 28,000（26.2%）\n- 专业版 56,000（28 件）／标准版 51,000（51 件）\n\n**保留的两条建议**：① 补强华北（较华南少 13,000 元、记录数偏少），先诊断渠道或需求原因再试点，并设下期金额与笔数双目标；② 稳住专业版高单价供给与报价，同时检查低价产品的折扣与毛利。\n\n**保留的限制**：明确写明本期仅 8 天单期快照，**无法据此判断增长、趋势或季节性**，需与上期/同期对比后再下结论；另附缺成本/毛利字段、样本极小两条。\n\n**验证**：`python3 generate_report.py` 删除原文件后重新生成成功；`awk` 复算结果与报告逐项一致；关键数值全部命中；代码不读取环境变量、不含测试框架。"
     }
   ],
-  "health": {
-    "ok": true,
-    "mode": "codex",
-    "active": 0,
-    "version": "0.1.0",
-    "configured": true
-  },
-  "status": "failed",
-  "error": "任务已取消，已有文件保留。\n+ actual - expected\n\n+ 'cancelled'\n- 'completed'\n"
+  "sessions": [
+    {
+      "id": "3d14f5b8-0d31-4f43-9c92-d2546ad05413",
+      "title": "Docker 实测 · 待办工具",
+      "runs": 3,
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 19946,
+          "sha256": "02475b5951df28b58c2cfbd7fe2606034d32a3cd2d585f356e1e74f8ddcef2cf",
+          "snapshot": "demo-output/code/index.html"
+        },
+        {
+          "path": "README.md",
+          "bytes": 5030,
+          "sha256": "c933a7d04688943d81e7e287c6f480eddef09724bd4d42a3b5d28e5176111a7e",
+          "snapshot": "demo-output/code/README.md"
+        }
+      ]
+    },
+    {
+      "id": "6be18157-26d1-498e-a024-a20016768a94",
+      "title": "Docker 实测 · 销售分析",
+      "runs": 2,
+      "files": [
+        {
+          "path": "analysis-report.md",
+          "bytes": 1973,
+          "sha256": "9e373cdfb4b68c1ff92447ded2543abdbc2bd1bb099120a9712d8454bdf4fe86",
+          "snapshot": "demo-output/analysis/analysis-report.md"
+        },
+        {
+          "path": "generate_report.py",
+          "bytes": 5387,
+          "sha256": "93ab1adff91c7e7d8b4c781c1fb815ec18e9bb4241fbe04573e4d2ba8c13beee",
+          "snapshot": "demo-output/analysis/generate_report.py"
+        }
+      ]
+    }
+  ],
+  "persistenceVerifiedAt": "2026-11-17T12:52:21.657Z"
 }
