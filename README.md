@@ -89,7 +89,7 @@ docker compose down
 ## 使用与验证
 
 1. 首页点击“把想法做成小工具”，等待完成，右侧预览 index.html。
-2. 发送“增加深色模式”，再次预览，验证新增任务与主题按钮。
+2. 真实模式发送“把网页标题改为我的行动清单”，再次预览确认修改；离线模式可发送“增加深色模式”体验预置修改。
 3. 回首页，点击材料分析示例，自动上传 sales.csv 并生成报告。
 4. CSV 样例共 8 行：数量 79，销售额 107000；华南 41000、华东 38000、华北 28000。
 5. 发送“整理成管理层摘要”，查看并下载 analysis-report.md。
@@ -163,3 +163,11 @@ CLI 参考：[官方非交互模式文档](https://developers.openai.com/codex/n
 ## Windows 本次构建网络说明
 
 新安装 Docker 后，旧终端可能没有 Docker 的 PATH，需重开终端。若使用 Windows 本地代理且 Docker Hub 认证超时，构建客户端可能没有读取系统代理；应在当前构建进程配置 HTTP_PROXY/HTTPS_PROXY，并通过 build-arg 将容器构建阶段代理设置为 host.docker.internal 对应端口。不要把宿主的 127.0.0.1 代理地址传给容器。代理地址依各自环境配置，本项目不修改系统代理。
+
+## 本次交付证据入口
+
+- [演示步骤与实测截图](docs/DEMO.md)
+- [Docker 与验证说明](docs/VALIDATION.md)
+- [四轮真实任务索引及重启校验](docs/runtime-evidence.json)
+- [完整脱敏消息、执行日志和文件 SHA-256](docs/delivery-evidence.json)
+- [真实生成的网页](docs/demo-output/code/index.html) 与 [管理摘要](docs/demo-output/analysis/analysis-report.md)

@@ -29,3 +29,15 @@ node scripts/verify-runtime.mjs
 没有 API 时，可将 AGENT_MODE 设为 demo 后重启并新建会话。页面明确显示“离线演示”，仅展示预置待办流程和确定性 CSV 统计。离线结果不能作为真实 Agent 联调证据。“演示失败”仅是离线模式故障测试指令。
 
 公开仓库已创建；正式录屏尚未制作。演示脚本描述目标流程，实际已完成范围以 VALIDATION.md 与 delivery-evidence.json 为准。
+
+## 本次浏览器实测截图
+
+真实 Codex 生成的待办网页，后续修改后仍可新增任务：
+
+![真实待办预览](screenshots/real-code.jpg)
+
+上传 CSV 后生成并继续修改的一页销售管理摘要：
+
+![真实报告预览](screenshots/real-report.jpg)
+
+截图取自本次实际运行的窄屏工作台；完整源码、报告和统计数据见 demo-output/ 与 delivery-evidence.json。
